@@ -34,7 +34,7 @@ The primary objective is to **identify sales patterns**, **segment customer beha
 - **Model**: K-Means Clustering  
 - **Validation**:
   - Elbow Method
-  - Silhouette Score (**0.8583**)
+  - Silhouette Scores: `k=2: 0.8688`, `k=3: 0.8583`, `k=4: 0.7576`, `k=5: 0.6629`
 - **Optimal Clusters**: `k = 3`
 
 #### Identified Customer Segments
@@ -51,16 +51,21 @@ The primary objective is to **identify sales patterns**, **segment customer beha
 
 All tests conducted at a **significance level (α) = 0.05**
 
-- **Two-Sample T-Test**  
-  Significant difference in **Average Order Value (AOV)** between  
-  **São Paulo (SP)** and **Rio de Janeiro (RJ)**
+- **One-Sample T-Test (Review Score vs 4.0)**  
+  `t = 25.1946`, `p < 0.001`  
+  Mean review score: `4.11`
 
-- **One-Way ANOVA**  
-  Customer review scores differ significantly across top product categories
+- **Two-Sample T-Test (SP vs RJ AOV)**  
+  `t = -9.7783`, `p < 0.001`  
+  Means: `SP = 143.32`, `RJ = 166.85`
 
 - **Chi-Square Test**  
-  Strong association between **customer segments** and **payment types**  
-  Result: `p < 0.001`
+  `χ² = 106.2976`, `p = 1.2136e-20`  
+  Strong association between **customer segments** and **payment behavior**
+
+- **One-Way ANOVA (Top 3 Categories)**  
+  `F = 65.4335`, `p = 4.5192e-29`  
+  Review scores differ significantly across top categories
 
 ---
 
@@ -72,7 +77,7 @@ All tests conducted at a **significance level (α) = 0.05**
   - Seasonal period: `m = 13` (quarterly patterns)
 - **Outcome**:
   - Generated **13-week sales forecast**
-  - Validation **RMSE: R$146,000**
+  - Validation **RMSE: R$146,110.47**
   - Useful for **inventory planning** and **budget allocation**
 
 ---

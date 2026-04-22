@@ -71,13 +71,22 @@ All tests conducted at a **significance level (α) = 0.05**
 
 ### 4. Time-Series Forecasting (Predictive Analytics)
 
-- **Model**: SARIMAX `(1,1,1)(1,1,1,13)`
+- **Modeling Strategy**: Holdout model selection (best model chosen by RMSE)
 - **Methodology**:
   - Weekly sales decomposition into **trend** and **seasonality**
-  - Seasonal period: `m = 13` (quarterly patterns)
+  - Removed first/last **partial weekly bins** to avoid boundary leakage
+  - Compared three candidates on the same test window:
+    - Seasonal Naive (`m = 13`)
+    - Holt-Winters Additive (`m = 13`)
+    - SARIMAX `(1,d,1)(1,1,1,13)`
 - **Outcome**:
-  - Generated **13-week sales forecast**
-  - Validation **RMSE: R$146,110.47**
+  - Best model: **Seasonal Naive (`m = 13`)**
+  - Generated **13-week sales forecast** with approximate 95% interval
+  - Validation metrics (best model):
+    - **RMSE: R$66,015.58**
+    - **MAE: R$46,757.99**
+    - **MAPE: 99.06%**
+  - RMSE improvement vs previous fixed SARIMAX approach: **54.82%**
   - Useful for **inventory planning** and **budget allocation**
 
 ---
@@ -107,7 +116,7 @@ All tests conducted at a **significance level (α) = 0.05**
   - Scikit-Learn (KMeans, PCA, MinMaxScaler)
 - **Statistics & Time Series**:  
   - SciPy  
-  - Statsmodels (ADF Test, SARIMAX)
+  - Statsmodels (ADF Test, SARIMAX, Holt-Winters)
 - **Association Rules**:  
   - Mlxtend (Apriori Algorithm)
 
@@ -117,5 +126,5 @@ All tests conducted at a **significance level (α) = 0.05**
 
 - Data-driven **customer segmentation** for targeted marketing
 - Statistically validated **regional and category-level insights**
-- Actionable **sales forecasts** for operational planning
+- Actionable **sales forecasts** for operational planning with **54.82% lower RMSE** than the previous setup
 - High-lift **product bundling strategies** to improve revenue
